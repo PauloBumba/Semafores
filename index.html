@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/Styles/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>semafores</title>
+</head>
+<body>
+    <main>
+        <section>
+            <img src="src/Assets/images/desligado.png" id="img">
+            <button id="off">Desligar</button>
+            <button id="red">Vermelho</button>
+            <button id="yellow">Amarelo</button>
+            <button id="green">Verde</button>
+            <button id="auto">Automático</button>
+        </section>
+    </main>
+    <script>
+        $(document).ready(function() {
+            function trocarImagem() {
+                let indiceAtual = 0;
+                const imagens = [
+                    "src/Assets/images/vermelho.png",
+                    "src/Assets/images/amarelo.png",
+                    "src/Assets/images/verde.png"
+                ];
+
+                return function() {
+                    $('#img').attr("src", imagens[indiceAtual]);
+                    indiceAtual = (indiceAtual + 1) % imagens.length;
+                };
+            }
+
+            const trocarImagemHandler = trocarImagem();
+
+            $("#red").click(function() {
+                $('#img').attr("src", "src/Assets/images/vermelho.png");
+            });
+
+            $("#yellow").click(function() {
+                $('#img').attr("src", "src/Assets/images/amarelo.png");
+            });
+
+            $("#green").click(function() {
+                $('#img').attr("src", "src/Assets/images/verde.png");
+            });
+
+            $("#auto").click(function() {
+                setInterval(trocarImagemHandler, 500);
+            });
+
+            $("#off").click(function() {
+                $('#img').attr("src", "src/Assets/images/desligado.png");
+            });
+        });
+    </script>
+</body>
+</html>
